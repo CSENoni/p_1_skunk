@@ -15,4 +15,13 @@ public class TestDie
 			assertTrue(die.getLastRoll() > 0 && die.getLastRoll() < 7);
 		}
 	}
+	
+	@Test
+	public void testPreprogrammedRolls() {
+		int dieArrayVals[] = new int[] {5, 4, 6, 1, 2, 3};
+		Die die = new Die(dieArrayVals);
+		die.roll();
+		
+		assertFalse(die.getIsTestMode());
+	}
 }

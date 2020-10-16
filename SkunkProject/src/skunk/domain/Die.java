@@ -17,6 +17,10 @@ public class Die
 		this.dieArrayVal = dieArrayVal;
 	}
 
+	public boolean getIsTestMode() {
+		return isTestMode;
+	}
+	
 	public int getLastRoll() // getter or accessor method
 	{
 
