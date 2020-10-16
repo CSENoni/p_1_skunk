@@ -5,11 +5,14 @@ import org.junit.Test;
 
 public class TestDie
 {
-
+	
 	@Test
-	public void test()
+	public void testRandomRolls()
 	{
-		fail("Not yet implemented");
+		Die die = new Die();
+		for(int i = 0; i < 30; i++) {
+			die.roll();
+			assertTrue(die.getLastRoll() > 0 && die.getLastRoll() < 7);
+		}
 	}
-
 }
