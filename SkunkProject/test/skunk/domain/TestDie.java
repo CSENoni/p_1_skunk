@@ -20,8 +20,12 @@ public class TestDie
 	public void testPreprogrammedRolls() {
 		int dieArrayVals[] = new int[] {5, 4, 6, 1, 2, 3};
 		Die die = new Die(dieArrayVals);
-		die.roll();
 		
-		assertFalse(die.getIsTestMode());
+		assertTrue(die.getIsTestMode());
+		
+		for(int i = 0; i < dieArrayVals.length; i++) {
+			die.roll();
+			assertTrue(dieArrayVals[i] == die.getLastRoll());
+		}
 	}
 }

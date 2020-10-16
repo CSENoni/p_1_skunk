@@ -31,12 +31,12 @@ public class Die
 						// anything
 	{
 		if(isTestMode) {
-			if(pos >= dieArrayVal.length) {
+			if(pos > dieArrayVal.length) {
 				StdOut.println("End of roll");
 				return;
 			}
-			this.lastRoll = dieArrayVal[pos];
 			pos++;
+			this.lastRoll = dieArrayVal[pos - 1];
 		}else {
 			this.lastRoll = (int) (Math.random() * 6 + 1);
 		}
