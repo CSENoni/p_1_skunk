@@ -19,6 +19,8 @@ public class Dice
 	private int lastRoll;
 	private Die die1;
 	private Die die2;
+	private int lastDie1Roll;
+	private int lastDie2Roll;
 
 	// Constructors (object initializers) also can be declared anywhere
 	// Convention: after instance fields/variables
@@ -53,10 +55,19 @@ public class Dice
 
 		die1.roll();
 		die2.roll();
+		this.lastDie1Roll = die1.getLastRoll();
+		this.lastDie2Roll = die2.getLastRoll();
 		this.lastRoll = die1.getLastRoll() + die2.getLastRoll();
 
 	}
-
+	
+	public int lastDie1Roll() {
+		return this.lastDie1Roll;
+	}
+	
+	public int lastDie2Roll() {
+		return this.lastDie2Roll;
+	}
 	// the following method converts the internals of
 	// this Dice object, and returns a descriptive String:
 	//
@@ -69,6 +80,7 @@ public class Dice
 	}
 
 	// static methods can go anywhere - but at end is one convention
+	
 
 	public static final int NUM_TRIALS = 360;
 

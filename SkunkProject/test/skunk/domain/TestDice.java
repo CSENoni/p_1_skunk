@@ -14,4 +14,12 @@ public class TestDice {
 		dice.roll();
 		assertTrue(dice.getLastRoll() == die1.getLastRoll() + die2.getLastRoll());
 	}
+	
+	@Test
+	public void testDieValues() {
+		Dice dice = new Dice(new Die(), new Die());
+		dice.roll();
+		assertTrue(dice.lastDie1Roll() > 0 && dice.lastDie1Roll() < 7);
+		assertTrue(dice.lastDie2Roll() > 0 && dice.lastDie2Roll() < 7);
+	}
 }
