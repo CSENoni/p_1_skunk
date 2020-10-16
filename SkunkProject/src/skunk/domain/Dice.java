@@ -30,7 +30,6 @@ public class Dice
 
 		this.die1 = new Die();
 		this.die2 = new Die();
-		this.roll();
 	}
 
 	public Dice(Die die1, Die die2) // overloaded constructor
