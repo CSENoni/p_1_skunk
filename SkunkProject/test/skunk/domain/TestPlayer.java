@@ -26,11 +26,8 @@ class TestPlayer {
 		Turn turn = new Turn();
 		Player player = new Player("Tom", turn);
 		player.play();
-		int scores = turn.getTurnScores();
 		player.play();
-		scores += turn.getTurnScores();
 		player.play();
-		scores += turn.getTurnScores();
-		assertTrue(scores == player.getTotalScores());
+		assertTrue(turn.getTurnScores() == player.getTotalScores());
 	}
 }
