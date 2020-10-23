@@ -9,9 +9,10 @@ public class Player {
 	
 	private int totalScores;
 	
-	public Player(String name) {
+	// second aug is just for test
+	public Player(String name, Turn turn) {
 		this.name = name;
-		curTurn = new Turn();
+		curTurn = turn;
 	}
 	
 	public String getName() {
@@ -20,9 +21,6 @@ public class Player {
 	
 	public void play() {
 		curTurn.createRoll(new Dice());
-	}
-	
-	public void stop() {
 		totalScores += curTurn.getTurnScores();
 	}
 	
