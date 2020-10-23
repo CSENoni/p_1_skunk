@@ -28,4 +28,12 @@ class TestTurn {
 		assertTrue(turn.getTurnScores() == scores);
 	}
 
+	@Test
+	void testNumbersOfRolls() {
+		Turn turn = new Turn();
+		turn.createRoll(new Dice());
+		turn.createRoll(new Dice());
+		turn.createRoll(new Dice());
+		assertTrue(turn.numbersOfRolls() == 3);
+	}
 }
