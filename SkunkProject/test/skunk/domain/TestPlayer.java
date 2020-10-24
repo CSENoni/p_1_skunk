@@ -30,4 +30,14 @@ class TestPlayer {
 		player.play();
 		assertTrue(turn.getTurnScores() == player.getTotalScores());
 	}
+	
+	@Test
+	void testLoseTheTurn() {
+		Turn turn = new Turn();
+		Player player = new Player("Tom", turn);
+		player.play();
+		
+		player.loseTheTurn();
+		assertTrue(player.getTotalScores() == 0);
+	}
 }

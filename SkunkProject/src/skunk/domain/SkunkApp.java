@@ -25,7 +25,10 @@ public class SkunkApp {
 			
 			read = StdIn.readLine();
 			while(read.equals("y") || read.equals("Y")) {
-				player.play();
+				boolean check = player.play();
+//				if( !check) {
+//					player.getTotalScores()
+//				}
 				StdOut.println("Roll of Dice with last roll: " + player.getCurrentScore() + 
 						", gives new turn score of " + player.getTotalScores());
 				StdOut.println("Roll again?[y/n]");

@@ -44,11 +44,11 @@ public class Player {
 	}
 	
 	private boolean checkPen(Dice dice) {
-		if(dice.lastDie1Roll() == 1 || dice.lastDie1Roll() == 1) {
+		if(dice.lastDie1Roll() == 1 || dice.lastDie2Roll() == 1) {
 			chip--;
 			StdOut.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
 			return false;
-		}else if(dice.lastDie1Roll() == 1 && dice.lastDie1Roll() == 1) {
+		}else if(dice.lastDie1Roll() == 1 && dice.lastDie2Roll() == 1) {
 			chip -= 4;
 			StdOut.println("Double Skunks! You lose the turn, zeroing out the game score and paying 4 chips to the kitty");
 			return false;
@@ -59,5 +59,9 @@ public class Player {
 			return false;
 		}
 		return true;
+	}
+	
+	public void loseTheTurn() {
+		totalScores = 0;
 	}
 }
