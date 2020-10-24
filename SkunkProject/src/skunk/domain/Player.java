@@ -1,5 +1,7 @@
 package skunk.domain;
 
+import edu.princeton.cs.introcs.StdOut;
+
 public class Player {
 	
 	private String name;
@@ -23,17 +25,14 @@ public class Player {
 		return this.name;
 	}
 	
-	public void play() {
+	public boolean play() {
 		Dice dice = new Dice();
 		curTurn.createRoll(dice);
 		
-		if(dice.lastDie1Roll() == 1 || dice.lastDie1Roll() == 1) {
-			chip--;
-		}else if(dice.lastDie1Roll() == 1 && dice.lastDie1Roll() == 1) {
-			chip -= 4;
-		}
 		curScore = dice.getLastRoll();
+		boolean check = checkPen(dice);
 		totalScores = curTurn.getTurnScores();
+		return check;
 	}
 	
 	public int getTotalScores() {
@@ -42,5 +41,26 @@ public class Player {
 	
 	public int getCurrentScore() {
 		return curScore;
+	}
+	
+	private boolean checkPen(Dice dice) {
+		if(dice.lastDie1Roll() == 1 || dice.lastDie1Roll() == 1) {
+			chip--;
+			StdOut.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
+			curScore = 0;
+			return false;
+		}else if(dice.lastDie1Roll() == 1 && dice.lastDie1Roll() == 1) {
+			chip -= 4;
+			curScore = 0;
+			StdOut.println("Double Skunks! You lose the turn, zeroing out the game score and paying 4 chips to the kitty");
+			return false;
+		}else if( dice.lastDie1Roll() == 1 && dice.lastDie2Roll() == 2 ||
+				dice.lastDie1Roll() == 2 && dice.lastDie2Roll() == 1) {
+			chip -= 2;
+			curScore = 0;
+			StdOut.println("Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
+			return false;
+		}
+		return true;
 	}
 }
