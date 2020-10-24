@@ -64,4 +64,8 @@ public class Player {
 	public void loseTheTurn() {
 		totalScores = 0;
 	}
+	
+	public int getChip() {
+		return chip;
+	}
 }

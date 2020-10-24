@@ -8,7 +8,6 @@ import edu.princeton.cs.introcs.StdOut;
 public class SkunkApp {
 	
 	// Only one turn and one player for this phase
-	// No chip and kitty implemented yet
 	public static void main(String[] args) {
 		StdOut.println("Welcome to Skunk game");
 		StdOut.println("Please enter player name:");
@@ -24,11 +23,14 @@ public class SkunkApp {
 			StdOut.println("Roll?[y/n]");
 			
 			read = StdIn.readLine();
+			Kitty kitty = new Kitty();
 			while(read.equals("y") || read.equals("Y")) {
 				boolean check = player.play();
-//				if( !check) {
-//					player.getTotalScores()
-//				}
+				if( !check) {
+					player.loseTheTurn();
+					kitty.add(50 - player.getChip());
+					break;
+				}
 				StdOut.println("Roll of Dice with last roll: " + player.getCurrentScore() + 
 						", gives new turn score of " + player.getTotalScores());
 				StdOut.println("Roll again?[y/n]");
@@ -36,6 +38,14 @@ public class SkunkApp {
 			}
 			StdOut.println("End of turn for 1");
 			StdOut.println("Score for this turn is " + player.getTotalScores());
+			StdOut.println("Scoreboard:");
+			StdOut.println("Kitty has " + kitty.getChip() + " chips");
+			StdOut.println("Player name -- Turn score -- Game Score -- Total Chips");
+			StdOut.println("----------------------------");
+			StdOut.println(player.getName() + " -- " + 
+					player.getTotalScores() + " -- " + 
+					player.getTotalScores() + " -- " + 
+					player.getChip());
 		}
 	}
 
