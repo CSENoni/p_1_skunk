@@ -10,7 +10,9 @@ public class SkunkApp {
 	// Only one turn and one player for this phase
 	public static void main(String[] args) {
 		StdOut.println("Welcome to Skunk game!");
-
+		StdOut.println("How many players?");
+		int numOfPlayers = StdIn.readInt();
+		
 		StdOut.println("Please enter player name:");
 		String read = StdIn.readLine();
 		Player player = new Player(read, new Turn());
