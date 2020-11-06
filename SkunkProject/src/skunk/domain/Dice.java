@@ -80,4 +80,13 @@ public class Dice
 //	}
 
 	// static methods can go anywhere - but at end is one convention
+	
+	//testing
+	public void setLastDie1Roll(int num) {
+		this.lastDie1Roll = num;
+	}
+	
+	public void setLastDie2Roll(int num) {
+		this.lastDie2Roll = num;
+	}
 }
