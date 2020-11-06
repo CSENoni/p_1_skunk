@@ -12,4 +12,5 @@ public class Roll {
 	public int getScores() {
 		return dice.getLastRoll();
 	}
+	
 }
