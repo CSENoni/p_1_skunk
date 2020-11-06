@@ -40,12 +40,14 @@ public class SkunkApp {
 					+ "The winner of each game collects all chips in \"kitty\" and in addition ﬁve chips from each losing player or 10 chips from any player without a score.\n");
 
 		}
-
+		StdOut.println("Starting game...");
 		StdOut.println("Roll?[y/n]");
-
-//		read = StdIn.readLine();
-//		Kitty kitty = new Kitty();
-//		while (read.equals("y") || read.equals("Y")) {
+		
+		
+		read = StdIn.readLine();
+		
+		while (read.equals("y") || read.equals("Y")) {
+			
 //			boolean check = player.play();
 //			if (!check) {
 //				player.loseTheTurn();
@@ -67,5 +69,5 @@ public class SkunkApp {
 //				+ player.getChip());
 
 	}
-
+	}
 }
