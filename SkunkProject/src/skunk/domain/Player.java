@@ -21,6 +21,10 @@ public class Player {
 		curTurn = turn;
 	}
 	
+	public Player(String name) {
+		this.name = name;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
