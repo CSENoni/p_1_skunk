@@ -20,4 +20,8 @@ public class Game {
 	public int getNumOfPlayers() {
 		return numOfPlayers;
 	}
+	
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
 }
