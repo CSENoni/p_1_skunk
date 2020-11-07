@@ -37,5 +37,6 @@ public class SkunkApp {
 		StdOut.println("Starting game...");
 		
 		game.play();
+		game.playFinalTurn();
 	}
 }
