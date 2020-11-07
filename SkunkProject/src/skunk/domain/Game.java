@@ -47,25 +47,7 @@ public class Game {
 			while (read.equalsIgnoreCase("y")) {
 				Roll roll = curPlayer.roll();
 				
-				if(roll.isSkunk()) {
-					StdOut.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
-					curPlayer.removeChip(1);
-					kitty.add(1);
-					break;
-				}else if(roll.isDoubleSkunk()) {
-					StdOut.println("Double Skunks! You lose the turn, zeroing out the game score and paying 4 chips to the kitty");
-					curPlayer.removeChip(4);
-					kitty.add(4);
-					curPlayer.zeroGameScores();
-					break;
-				}else if(roll.isDeuce()) {
-					StdOut.println("Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
-					curPlayer.removeChip(2);
-					kitty.add(2);
-					break;
-				}else {
-					StdOut.println(roll.getDice());
-				}
+				if(checkAndPrintPenalty(roll, curPlayer)) break;
 				
 				StdOut.println("Roll again?[y/n]");
 				read = StdIn.readString();
@@ -84,6 +66,29 @@ public class Game {
 		}
 	}
 	
+	private boolean checkAndPrintPenalty(Roll roll, Player curPlayer) {
+		if(roll.isSkunk()) {
+			StdOut.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
+			curPlayer.removeChip(1);
+			kitty.add(1);
+			return true;
+		}else if(roll.isDoubleSkunk()) {
+			StdOut.println("Double Skunks! You lose the turn, zeroing out the game score and paying 4 chips to the kitty");
+			curPlayer.removeChip(4);
+			kitty.add(4);
+			curPlayer.zeroGameScores();
+			return true;
+		}else if(roll.isDeuce()) {
+			StdOut.println("Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
+			curPlayer.removeChip(2);
+			kitty.add(2);
+			return true;
+		}else {
+			StdOut.println(roll.getDice());
+			return false;
+		}
+	}
+	
 	public void playFinalTurn() {
 		StdOut.println();
 		StdOut.println("---- Last turn for all ----");
@@ -99,25 +104,7 @@ public class Game {
 			while (read.equalsIgnoreCase("y")) {
 				Roll roll = curPlayer.roll();
 				
-				if(roll.isSkunk()) {
-					StdOut.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
-					curPlayer.removeChip(1);
-					kitty.add(1);
-					break;
-				}else if(roll.isDoubleSkunk()) {
-					StdOut.println("Double Skunks! You lose the turn, zeroing out the game score and paying 4 chips to the kitty");
-					curPlayer.removeChip(4);
-					kitty.add(4);
-					curPlayer.zeroGameScores();
-					break;
-				}else if(roll.isDeuce()) {
-					StdOut.println("Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
-					curPlayer.removeChip(2);
-					kitty.add(2);
-					break;
-				}else {
-					StdOut.println(roll.getDice());
-				}
+				if(checkAndPrintPenalty(roll, curPlayer)) break;
 				
 				StdOut.println("Roll again?[y/n]");
 				read = StdIn.readString();
