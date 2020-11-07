@@ -19,13 +19,13 @@ class TestTurn {
 	void testScores() {
 		Dice dice = new Dice();
 		Turn turn = new Turn();
-		turn.createRoll(dice);
+		Roll roll = turn.createRoll(dice);
 		int scores = dice.getLastRoll();
-		assertTrue(turn.getTurnScores() == scores);
-		dice = new Dice();
-		turn.createRoll(dice);
-		scores += dice.getLastRoll();
-		assertTrue(turn.getTurnScores() == scores);
+		
+		if(roll.isDeuce() || roll.isDoubleSkunk() || roll.isSkunk())
+			assertTrue(turn.getTurnScores() == 0);
+		else
+			assertTrue(turn.getTurnScores() == scores);
 	}
 
 	@Test
