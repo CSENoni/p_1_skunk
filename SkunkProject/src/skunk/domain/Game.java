@@ -160,17 +160,21 @@ public class Game {
 			winner.addChip(chipEarned);
 			StdOut.println("Game winner has total " + winner.getChip() + " chips");
 			
-			StdOut.println();
-			StdOut.println("Final Scoreboard:");
-			StdOut.println("Player name -- Game Score -- Total Chips");
-			StdOut.println();
-			StdOut.println("----------------------------");
-			
-			for(int i = 0; i < players.size(); i++) {
-				Player player = players.get(i);
-				StdOut.println(player.getName() + " -- " + player.getTotalScores() + " -- "
-						+ player.getChip());
-			}
+			printFinalScoreBoard();
+		}
+	}
+	
+	private void printFinalScoreBoard() {
+		StdOut.println();
+		StdOut.println("Final Scoreboard:");
+		StdOut.println("Player name -- Game Score -- Total Chips");
+		StdOut.println();
+		StdOut.println("----------------------------");
+		
+		for(int i = 0; i < players.size(); i++) {
+			Player player = players.get(i);
+			StdOut.println(player.getName() + " -- " + player.getTotalScores() + " -- "
+					+ player.getChip());
 		}
 	}
 	
