@@ -53,17 +53,21 @@ public class Game {
 				read = StdIn.readString();
 			}
 			
-			StdOut.println("End of turn for " + curPlayer.getName());
-			StdOut.println("Score for this turn is " + curPlayer.getCurrentScore());
-			StdOut.println("Previous Game Score: " + (curPlayer.getTotalScores() - curPlayer.getCurrentScore()));
-			StdOut.println("New Game Score: " + curPlayer.getTotalScores());
 			
+			printTurnScore(curPlayer);
 			printScoreBoard();
 			
 			pos++;
 			if(isLastTurn(curPlayer)) break;
 			curPlayer = players.get((pos >= players.size() ? pos = 0 : pos));
 		}
+	}
+	
+	private void printTurnScore(Player curPlayer) {
+		StdOut.println("End of turn for " + curPlayer.getName());
+		StdOut.println("Score for this turn is " + curPlayer.getCurrentScore());
+		StdOut.println("Previous Game Score: " + (curPlayer.getTotalScores() - curPlayer.getCurrentScore()));
+		StdOut.println("New Game Score: " + curPlayer.getTotalScores());
 	}
 	
 	private boolean checkAndPrintPenalty(Roll roll, Player curPlayer) {
@@ -110,10 +114,7 @@ public class Game {
 				read = StdIn.readString();
 			}
 			
-			StdOut.println("End of turn for " + curPlayer.getName());
-			StdOut.println("Score for this turn is " + curPlayer.getCurrentScore());
-			StdOut.println("Previous Game Score: " + (curPlayer.getTotalScores() - curPlayer.getCurrentScore()));
-			StdOut.println("New Game Score: " + curPlayer.getTotalScores());
+			printTurnScore(curPlayer);
 			
 			printScoreBoard();
 			
