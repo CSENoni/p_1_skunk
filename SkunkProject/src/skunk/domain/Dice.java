@@ -74,10 +74,10 @@ public class Dice
 	// Roll of 7 => 4 + 3
 	//
 
-//	public String toString()
-//	{
-//		return "Dice with last roll: " + getLastRoll() + " => " + die1.getLastRoll() + " + " + die2.getLastRoll();
-//	}
+	public String toString()
+	{
+		return "Dice with last roll: " + getLastRoll() + " => " + die1.getLastRoll() + " + " + die2.getLastRoll();
+	}
 
 	// static methods can go anywhere - but at end is one convention
 	

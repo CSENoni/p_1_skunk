@@ -12,11 +12,11 @@ class TestGame {
 		assertTrue(game.getNumOfPlayers() == 3);
 	}
 	
-	@Test
-	void testAddPlayer() {
-		Game game = new Game(2);
-		game.addPlayer("Tom");
-		assertTrue(game.getPlayers().get(0).getName().equals("Tom"));
-	}
+//	@Test
+//	void testAddPlayer() {
+//		Game game = new Game(2);
+//		game.addPlayer("Tom");
+//		assertTrue(game.getPlayers().get(0).getName().equals("Tom"));
+//	}
 
 }

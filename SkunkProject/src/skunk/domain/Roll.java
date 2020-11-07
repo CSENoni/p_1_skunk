@@ -26,4 +26,8 @@ public class Roll {
 		return dice.lastDie1Roll() == 1 && dice.lastDie2Roll() == 2 || 
 				dice.lastDie1Roll() == 2 && dice.lastDie2Roll() == 1;
 	}
+	
+	public Dice getDice() {
+		return dice;
+	}
 }

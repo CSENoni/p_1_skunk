@@ -10,14 +10,24 @@ public class Turn {
 	
 	private int turnScores;
 	
+	private int curRollScore;
+	
 	public Turn() {
 		rolls = new ArrayList<Roll>();
 	}
 	
-	public void createRoll(Dice dice) {
+	public Roll createRoll(Dice dice) {
 		Roll roll = new Roll(dice);
 		rolls.add(roll);
-		turnScores += roll.getScores();
+		
+		if(roll.isSkunk() || roll.isDeuce() || roll.isDeuce()) {
+			turnScores = 0;
+		}else {
+			curRollScore = roll.getScores();
+			turnScores += curRollScore;
+		}
+		
+		return roll;
 	}
 	
 	public int numbersOfRolls() {
@@ -26,5 +36,9 @@ public class Turn {
 	
 	public int getTurnScores() {
 		return turnScores;
+	}
+	
+	public int getCurRollScore() {
+		return curRollScore;
 	}
 }

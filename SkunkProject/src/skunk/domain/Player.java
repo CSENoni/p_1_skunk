@@ -2,15 +2,15 @@ package skunk.domain;
 
 import java.util.ArrayList;
 
-import edu.princeton.cs.introcs.StdOut;
-
 public class Player {
 	
 	private String name;
 	
 	private ArrayList<Turn> turns;
 	
-	private int curScore;
+	private int curTurnScore;
+	
+	private int prevTurnScore;
 	
 	private int chip = 50;
 	
@@ -23,14 +23,14 @@ public class Player {
 		return this.name;
 	}
 	
-	public void play() {
-		turns.add(new Turn());
+	public Roll roll() {
+		prevTurnScore = curTurnScore;
 		Turn curTurn = turns.get(turns.size() - 1);
 		Dice dice = new Dice();
-		curTurn.createRoll(dice);
+		Roll roll = curTurn.createRoll(dice);
 		
-		curScore = dice.getLastRoll();
-//		boolean check = checkPen(dice);
+		curTurnScore = curTurn.getTurnScores();
+		return roll;
 	}
 	
 	public int getTotalScores() {
@@ -42,38 +42,32 @@ public class Player {
 	}
 	
 	public int getCurrentScore() {
-		return curScore;
+		return curTurnScore;
 	}
 	
-//	private boolean checkPen(Dice dice) {
-//		if(dice.lastDie1Roll() == 1 || dice.lastDie2Roll() == 1) {
-//			chip--;
-//			StdOut.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
-//			return false;
-//		}else if(dice.lastDie1Roll() == 1 && dice.lastDie2Roll() == 1) {
-//			chip -= 4;
-//			StdOut.println("Double Skunks! You lose the turn, zeroing out the game score and paying 4 chips to the kitty");
-//			return false;
-//		}else if( dice.lastDie1Roll() == 1 && dice.lastDie2Roll() == 2 ||
-//				dice.lastDie1Roll() == 2 && dice.lastDie2Roll() == 1) {
-//			chip -= 2;
-//			StdOut.println("Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
-//			return false;
-//		}
-//		return true;
-//	}
+	public int getPrevScore() {
+		return prevTurnScore;
+	}
 	
 	public void zeroGameScores() {
 		turns = new ArrayList<Turn>();
 		addTurn();
-		curScore = 0;
+		curTurnScore = 0;
 	}
 	
 	public int getChip() {
 		return chip;
 	}
 	
-	private void addTurn() {
+	public void removeChip(int num) {
+		chip -= num;
+	}
+	
+	public void addChip(int num) {
+		chip += num;
+	}
+	
+	public void addTurn() {
 		turns.add(new Turn());
 	}
 }

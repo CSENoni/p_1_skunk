@@ -12,16 +12,10 @@ public class SkunkApp {
 		int numOfPlayers = StdIn.readInt();
 		
 		Game game = new Game(numOfPlayers);
-		String read = "";
-		
-		for(int i = 0; i < numOfPlayers; i++) {
-			StdOut.println("Please enter player name:");
-			read = StdIn.readLine();
-			game.addPlayer(read);
-		}
+		game.addPlayer();
 
 		StdOut.println("Do you want to read the game rule?[y/n]");
-		read = StdIn.readLine();
+		String read = StdIn.readString();
 
 		if (read.equalsIgnoreCase("y")) {
 			StdOut.println("DIRECTIONS FOR PLAYING\n\n" +
@@ -41,33 +35,7 @@ public class SkunkApp {
 
 		}
 		StdOut.println("Starting game...");
-		StdOut.println("Roll?[y/n]");
 		
-		
-		read = StdIn.readLine();
-		
-		while (read.equals("y") || read.equals("Y")) {
-			
-//			boolean check = player.play();
-//			if (!check) {
-//				player.loseTheTurn();
-//				kitty.add(50 - player.getChip());
-//				break;
-//			}
-//			StdOut.println("Roll of Dice with last roll: " + player.getCurrentScore() + ", gives new turn score of "
-//					+ player.getTotalScores());
-//			StdOut.println("Roll again?[y/n]");
-//			read = StdIn.readLine();
-//		}
-//		StdOut.println("End of turn for 1");
-//		StdOut.println("Score for this turn is " + player.getTotalScores());
-//		StdOut.println("Scoreboard:");
-//		StdOut.println("Kitty has " + kitty.getChip() + " chips");
-//		StdOut.println("Player name -- Turn score -- Game Score -- Total Chips");
-//		StdOut.println("----------------------------");
-//		StdOut.println(player.getName() + " -- " + player.getTotalScores() + " -- " + player.getTotalScores() + " -- "
-//				+ player.getChip());
-
-	}
+		game.play();
 	}
 }
