@@ -18,11 +18,11 @@ class TestKitty {
 	}
 
 	@Test
-	void testChipDect() {
+	void testRemoveChip() {
 		Kitty kit = new Kitty();
 		
 		kit.add(50);
-		kit.chipDect();
+		kit.removeChip(5);
 		assertTrue(kit.getChip() == 45);
 	}
 	

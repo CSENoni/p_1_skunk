@@ -156,6 +156,7 @@ public class Game {
 			}
 			StdOut.println("Game winner earns " + kitty.getChip() + " chips from kitty");
 			chipEarned += kitty.getChip();
+			kitty.removeChip(kitty.getChip());
 			
 			winner.addChip(chipEarned);
 			StdOut.println("Game winner has total " + winner.getChip() + " chips");

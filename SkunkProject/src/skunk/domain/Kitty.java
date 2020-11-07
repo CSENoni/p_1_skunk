@@ -7,8 +7,8 @@ public class Kitty {
 		chip += num;
 	}
 	
-	public void chipDect() {
-		chip -= 5;
+	public void removeChip(int num) {
+		chip -= num;
 	}
 	
 	public int getChip() {
