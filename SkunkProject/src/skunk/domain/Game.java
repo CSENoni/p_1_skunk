@@ -18,12 +18,22 @@ public class Game {
 		kitty = new Kitty();
 	}
 	
+	public Game() {
+		players = new ArrayList<Player>();
+		kitty = new Kitty();
+	}
+	
 	public void addPlayer() {
 		for(int i = 0; i < numOfPlayers; i++) {
 			StdOut.println("Please enter player name:");
 			String name = StdIn.readString();
 			players.add(new Player(name));
 		}
+	}
+	
+	public void addPlayer(String name) {
+		players.add(new Player(name));
+		System.out.println(name);
 	}
 	
 	public int getNumOfPlayers() {
