@@ -73,6 +73,8 @@ public class GameGUI extends JFrame {
 				}
 				game.pass();
 				if(done(game)) {
+					JOptionPane.showMessageDialog(null, "Game winner is " + game.winner().getName() + 
+							" with scores of " + game.winner().getTotalScores());
 					dispose();
 				}else {
 					reset(game);

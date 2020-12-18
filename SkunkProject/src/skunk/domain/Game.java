@@ -101,12 +101,12 @@ public class Game {
 		pos = (pos >= getNumOfPlayers()) ? pos = 0 : pos;
 	}
 	
-	private void printTurnScore(Player curPlayer) {
-		StdOut.println("End of turn for " + curPlayer.getName());
-		StdOut.println("Score for this turn is " + curPlayer.getCurrentScore());
-		StdOut.println("Previous Game Score: " + (curPlayer.getTotalScores() - curPlayer.getCurrentScore()));
-		StdOut.println("New Game Score: " + curPlayer.getTotalScores());
-	}
+//	private void printTurnScore(Player curPlayer) {
+//		StdOut.println("End of turn for " + curPlayer.getName());
+//		StdOut.println("Score for this turn is " + curPlayer.getCurrentScore());
+//		StdOut.println("Previous Game Score: " + (curPlayer.getTotalScores() - curPlayer.getCurrentScore()));
+//		StdOut.println("New Game Score: " + curPlayer.getTotalScores());
+//	}
 	
 	public String getMsg() {
 		return msg;
@@ -246,6 +246,20 @@ public class Game {
 			StdOut.println(player.getName() + " -- " + player.getTotalScores() + " -- "
 					+ player.getChip());
 		}
+	}
+	
+	public Player winner() {
+		Player winner = null;
+		int max = 0;
+		for(int i = 0; i < getNumOfPlayers(); i++) {
+			Player player = players.get(i);
+			if(player.getTotalScores() > max) {
+				max = player.getTotalScores();
+				winner = player;
+				pos = i;
+			}
+		}
+		return winner;
 	}
 	
 //	private void printScoreBoard() {
