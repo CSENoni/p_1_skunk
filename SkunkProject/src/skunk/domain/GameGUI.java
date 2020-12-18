@@ -1,8 +1,5 @@
 package skunk.domain;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,6 +16,10 @@ import javax.swing.JTextPane;
 public class GameGUI extends JFrame {
 
 	private JPanel contentPane;
+	private JLabel lblName;
+	private JButton btnRoll;
+	private JTextPane textPaneMsg;
+	private JLabel lblDice;
 	
 	public GameGUI(Game game) {
 		game.play();
@@ -32,10 +33,10 @@ public class GameGUI extends JFrame {
 		JLabel lbDie1 = new JLabel();
 		lbDie1.setForeground(Color.WHITE);
 		JLabel lbDie2 = new JLabel();
-		JLabel lblDice = new JLabel("0");
-		JTextPane textPaneMsg = new JTextPane();
+		lblDice = new JLabel("0");
+		textPaneMsg = new JTextPane();
 		
-		JButton btnRoll = new JButton("Roll");
+		btnRoll = new JButton("Roll");
 		btnRoll.setBackground(Color.GREEN);
 		btnRoll.setForeground(Color.WHITE);
 		btnRoll.setFocusPainted(false);
@@ -60,10 +61,12 @@ public class GameGUI extends JFrame {
 		btnRoll.setBounds(193, 430, 150, 50);
 		contentPane.add(btnRoll);
 		
-		JButton btnSkip = new JButton("Skip");
-		btnSkip.setBackground(Color.WHITE);
-		btnSkip.addActionListener(new ActionListener() {
+		JButton btnPass = new JButton("Pass");
+		btnPass.setBackground(Color.WHITE);
+		btnPass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				game.pass();
+				reset(game);
 			}
 		});
 		
@@ -72,16 +75,16 @@ public class GameGUI extends JFrame {
 		
 		lbDie2.setBounds(508, 85, 150, 150);
 		contentPane.add(lbDie2);
-		btnSkip.setFont(new Font("Verdana", Font.ITALIC, 28));
-		btnSkip.setBounds(508, 430, 150, 50);
-		contentPane.add(btnSkip);
+		btnPass.setFont(new Font("Verdana", Font.ITALIC, 28));
+		btnPass.setBounds(508, 430, 150, 50);
+		contentPane.add(btnPass);
 		
 		JLabel lblNameLabel = new JLabel("Name:");
 		lblNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNameLabel.setBounds(293, 263, 60, 28);
 		contentPane.add(lblNameLabel);
 		
-		JLabel lblName = new JLabel("");
+		lblName = new JLabel("");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblName.setBounds(350, 263, 60, 28);
 		lblName.setText(game.getCurPlayer().getName());
@@ -97,12 +100,6 @@ public class GameGUI extends JFrame {
 		lblDice.setBounds(519, 263, 60, 28);
 		contentPane.add(lblDice);
 		
-		JButton btnPass = new JButton("Pass");
-		btnPass.setFont(new Font("Verdana", Font.PLAIN, 28));
-		btnPass.setBackground(Color.WHITE);
-		btnPass.setBounds(353, 430, 150, 50);
-		contentPane.add(btnPass);
-		
 		
 		textPaneMsg.setForeground(Color.RED);
 		textPaneMsg.setBackground(Color.WHITE);
@@ -110,5 +107,13 @@ public class GameGUI extends JFrame {
 		textPaneMsg.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textPaneMsg.setBounds(293, 301, 264, 119);
 		contentPane.add(textPaneMsg);
+	}
+	
+	private void reset(Game game) {
+		game.play();
+		btnRoll.setEnabled(true);
+		lblName.setText(game.getCurPlayer().getName());
+		textPaneMsg.setText("");
+		lblDice.setText("0");
 	}
 }

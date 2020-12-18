@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 class TestGame {
 
-	@Test
-	void testNumOfPlayers() {
-		Game game = new Game(3);
-		assertTrue(game.getNumOfPlayers() == 3);
-	}
+//	@Test
+//	void testNumOfPlayers() {
+//		Game game = new Game(3);
+//		assertTrue(game.getNumOfPlayers() == 3);
+//	}
 }

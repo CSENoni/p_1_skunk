@@ -6,7 +6,7 @@ import edu.princeton.cs.introcs.StdIn;
 import edu.princeton.cs.introcs.StdOut;
 
 public class Game {
-	private int numOfPlayers;
+//	private int numOfPlayers;
 	private ArrayList<Player> players;
 	private Kitty kitty;
 	private int pos = 0;
@@ -15,24 +15,24 @@ public class Game {
 	private String msg;
 	private Dice curDice;
 	
-	public Game(int numOfPlayers) {
-		this.numOfPlayers = numOfPlayers;
-		players = new ArrayList<Player>();
-		kitty = new Kitty();
-	}
+//	public Game(int numOfPlayers) {
+//		this.numOfPlayers = numOfPlayers;
+//		players = new ArrayList<Player>();
+//		kitty = new Kitty();
+//	}
 	
 	public Game() {
 		players = new ArrayList<Player>();
 		kitty = new Kitty();
 	}
 	
-	public void addPlayer() {
-		for(int i = 0; i < numOfPlayers; i++) {
-			StdOut.println("Please enter player name:");
-			String name = StdIn.readString();
-			players.add(new Player(name));
-		}
-	}
+//	public void addPlayer() {
+//		for(int i = 0; i < numOfPlayers; i++) {
+//			StdOut.println("Please enter player name:");
+//			String name = StdIn.readString();
+//			players.add(new Player(name));
+//		}
+//	}
 	
 	public void addPlayer(String name) {
 		players.add(new Player(name));
@@ -40,7 +40,7 @@ public class Game {
 	}
 	
 	public int getNumOfPlayers() {
-		return numOfPlayers;
+		return players.size();
 	}
 	
 	public ArrayList<Player> getPlayers() {
@@ -94,6 +94,11 @@ public class Game {
 //		curPlayer = players.get((pos >= players.size() ? pos = 0 : pos));
 //	}
 //}
+	
+	public void pass() {
+		pos++;
+		pos = (pos >= getNumOfPlayers()) ? pos = 0 : pos;
+	}
 	
 	private void printTurnScore(Player curPlayer) {
 		StdOut.println("End of turn for " + curPlayer.getName());
@@ -188,7 +193,7 @@ public class Game {
 		StdOut.println();
 		Player winner = null;
 		int max = 0;
-		for(int i = 0; i < numOfPlayers; i++) {
+		for(int i = 0; i < getNumOfPlayers(); i++) {
 			Player player = players.get(i);
 			StdOut.println("Final game score for " + player.getName() + " is " + player.getTotalScores());
 			if(player.getTotalScores() > max) {
@@ -202,7 +207,7 @@ public class Game {
 			StdOut.println("Game winner is " + winner.getName() + " with score of " + winner.getTotalScores());
 			int chipEarned = 0;
 			
-			for(int i = 0; i < numOfPlayers; i++) {
+			for(int i = 0; i < getNumOfPlayers(); i++) {
 				if(i == pos) continue;
 				Player player = players.get(i);
 				
