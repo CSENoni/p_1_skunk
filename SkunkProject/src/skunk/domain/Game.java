@@ -10,10 +10,11 @@ public class Game {
 	private ArrayList<Player> players;
 	private Kitty kitty;
 	private int pos = 0;
-	private static int SCORE_FOR_FINAL_ROLL = 100;
+	private static int SCORE_FOR_FINAL_ROLL = 50;
 	private Player curPlayer;
 	private String msg;
 	private Dice curDice;
+	private int checkPoint = -1;
 	
 //	public Game(int numOfPlayers) {
 //		this.numOfPlayers = numOfPlayers;
@@ -160,78 +161,78 @@ public class Game {
 			return false;
 		}
 	}
-	
-	public void playFinalTurn() {
-		StdOut.println();
-		StdOut.println("---- Last turn for all ----");
-		Player curPlayer = players.get((pos >= players.size() ? pos = 0 : pos));
-		while(curPlayer.getTotalScores() < SCORE_FOR_FINAL_ROLL) {
-			curPlayer.addTurn();
-			
-			StdOut.println();
-			StdOut.println("Player: " + curPlayer.getName());
-			StdOut.println("Roll?[y/n]");
-			String read = StdIn.readString();
-			
-			while (read.equalsIgnoreCase("y")) {
-				Roll roll = curPlayer.roll();
-				
-				if(checkAndPrintPenalty(roll, curPlayer)) break;
-				
-				StdOut.println("Roll again?[y/n]");
-				read = StdIn.readString();
-			}
-			
-			printTurnScore(curPlayer);
-			
-			printScoreBoard();
-			
-			pos++;
-			curPlayer = players.get((pos >= players.size() ? pos = 0 : pos));
-		}
 		
-		StdOut.println();
-		Player winner = null;
-		int max = 0;
-		for(int i = 0; i < getNumOfPlayers(); i++) {
-			Player player = players.get(i);
-			StdOut.println("Final game score for " + player.getName() + " is " + player.getTotalScores());
-			if(player.getTotalScores() > max) {
-				max = player.getTotalScores();
-				winner = player;
-				pos = i;
-			}
-		}
-		
-		if(winner != null) {
-			StdOut.println("Game winner is " + winner.getName() + " with score of " + winner.getTotalScores());
-			int chipEarned = 0;
-			
-			for(int i = 0; i < getNumOfPlayers(); i++) {
-				if(i == pos) continue;
-				Player player = players.get(i);
-				
-				
-				if(player.getTotalScores() == 0) {
-					StdOut.println("Game winner earns 10 chips from " + player.getName() + " with zero score");
-					chipEarned += 10;
-					player.removeChip(10);
-				}else {
-					StdOut.println("Game winner earns 5 chips from " + player.getName() + " with losing score");
-					chipEarned += 5;
-					player.removeChip(5);
-				}
-			}
-			StdOut.println("Game winner earns " + kitty.getChip() + " chips from kitty");
-			chipEarned += kitty.getChip();
-			kitty.removeChip(kitty.getChip());
-			
-			winner.addChip(chipEarned);
-			StdOut.println("Game winner has total " + winner.getChip() + " chips");
-			
-			printFinalScoreBoard();
-		}
-	}
+//	public void playFinalTurn() {
+//		StdOut.println();
+//		StdOut.println("---- Last turn for all ----");
+//		Player curPlayer = players.get((pos >= players.size() ? pos = 0 : pos));
+//		while(curPlayer.getTotalScores() < SCORE_FOR_FINAL_ROLL) {
+//			curPlayer.addTurn();
+//			
+//			StdOut.println();
+//			StdOut.println("Player: " + curPlayer.getName());
+//			StdOut.println("Roll?[y/n]");
+//			String read = StdIn.readString();
+//			
+//			while (read.equalsIgnoreCase("y")) {
+//				Roll roll = curPlayer.roll();
+//				
+//				if(checkAndPrintPenalty(roll, curPlayer)) break;
+//				
+//				StdOut.println("Roll again?[y/n]");
+//				read = StdIn.readString();
+//			}
+//			
+//			printTurnScore(curPlayer);
+//			
+////			printScoreBoard();
+//			
+//			pos++;
+//			curPlayer = players.get((pos >= players.size() ? pos = 0 : pos));
+//		}
+//		
+//		StdOut.println();
+//		Player winner = null;
+//		int max = 0;
+//		for(int i = 0; i < getNumOfPlayers(); i++) {
+//			Player player = players.get(i);
+//			StdOut.println("Final game score for " + player.getName() + " is " + player.getTotalScores());
+//			if(player.getTotalScores() > max) {
+//				max = player.getTotalScores();
+//				winner = player;
+//				pos = i;
+//			}
+//		}
+//		
+//		if(winner != null) {
+//			StdOut.println("Game winner is " + winner.getName() + " with score of " + winner.getTotalScores());
+//			int chipEarned = 0;
+//			
+//			for(int i = 0; i < getNumOfPlayers(); i++) {
+//				if(i == pos) continue;
+//				Player player = players.get(i);
+//				
+//				
+//				if(player.getTotalScores() == 0) {
+//					StdOut.println("Game winner earns 10 chips from " + player.getName() + " with zero score");
+//					chipEarned += 10;
+//					player.removeChip(10);
+//				}else {
+//					StdOut.println("Game winner earns 5 chips from " + player.getName() + " with losing score");
+//					chipEarned += 5;
+//					player.removeChip(5);
+//				}
+//			}
+//			StdOut.println("Game winner earns " + kitty.getChip() + " chips from kitty");
+//			chipEarned += kitty.getChip();
+//			kitty.removeChip(kitty.getChip());
+//			
+//			winner.addChip(chipEarned);
+//			StdOut.println("Game winner has total " + winner.getChip() + " chips");
+//			
+//			printFinalScoreBoard();
+//		}
+//	}
 	
 	private void printFinalScoreBoard() {
 		StdOut.println();
@@ -247,21 +248,33 @@ public class Game {
 		}
 	}
 	
-	private void printScoreBoard() {
-		StdOut.println();
-		StdOut.println("Scoreboard:");
-		StdOut.println("Kitty has " + kitty.getChip() + " chips");
-		StdOut.println("Player name -- Turn score -- Game Score -- Total Chips");
-		StdOut.println("----------------------------");
-		
-		for(int i = 0; i < players.size(); i++) {
-			Player player = players.get(i);
-			StdOut.println(player.getName() + " -- " + player.getCurrentScore() + " -- " + player.getTotalScores() + " -- "
-					+ player.getChip());
+//	private void printScoreBoard() {
+//		StdOut.println();
+//		StdOut.println("Scoreboard:");
+//		StdOut.println("Kitty has " + kitty.getChip() + " chips");
+//		StdOut.println("Player name -- Turn score -- Game Score -- Total Chips");
+//		StdOut.println("----------------------------");
+//		
+//		for(int i = 0; i < players.size(); i++) {
+//			Player player = players.get(i);
+//			StdOut.println(player.getName() + " -- " + player.getCurrentScore() + " -- " + player.getTotalScores() + " -- "
+//					+ player.getChip());
+//		}
+//	}
+	
+	public boolean isLastTurn() {
+		if (curPlayer.getTotalScores() >= SCORE_FOR_FINAL_ROLL) {
+			checkPoint = pos;
+			return true;
 		}
+		return false;
 	}
 	
-	private boolean isLastTurn(Player player) {
-		return player.getTotalScores() >= SCORE_FOR_FINAL_ROLL;
+	public boolean isFinished() {
+		return checkPoint == pos;
+	}
+	
+	public Kitty getKitty() {
+		return kitty;
 	}
 }

@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -20,6 +21,7 @@ public class GameGUI extends JFrame {
 	private JButton btnRoll;
 	private JTextPane textPaneMsg;
 	private JLabel lblDice;
+	private boolean finalMsg = true;
 	
 	public GameGUI(Game game) {
 		game.play();
@@ -65,8 +67,16 @@ public class GameGUI extends JFrame {
 		btnPass.setBackground(Color.WHITE);
 		btnPass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(game.isLastTurn() && finalMsg) {
+					finalMsg = true;
+					JOptionPane.showMessageDialog(null, "This is the final turn");
+				}
 				game.pass();
-				reset(game);
+				if(done(game)) {
+					dispose();
+				}else {
+					reset(game);
+				}
 			}
 		});
 		
@@ -110,10 +120,22 @@ public class GameGUI extends JFrame {
 	}
 	
 	private void reset(Game game) {
+		ScoreBoardGUI scoreBoard = new ScoreBoardGUI(game);
+		
+		scoreBoard.setVisible(true);
 		game.play();
+		
 		btnRoll.setEnabled(true);
 		lblName.setText(game.getCurPlayer().getName());
 		textPaneMsg.setText("");
 		lblDice.setText("0");
+	}
+	
+	private boolean done(Game game) {
+		if(game.isFinished()) {
+			btnRoll.setEnabled(false);
+			return true;
+		}
+		return false;
 	}
 }
