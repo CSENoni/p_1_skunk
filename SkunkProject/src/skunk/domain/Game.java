@@ -11,6 +11,9 @@ public class Game {
 	private Kitty kitty;
 	private int pos = 0;
 	private static int SCORE_FOR_FINAL_ROLL = 100;
+	private Player curPlayer;
+	private String msg;
+	private Dice curDice;
 	
 	public Game(int numOfPlayers) {
 		this.numOfPlayers = numOfPlayers;
@@ -45,33 +48,52 @@ public class Game {
 	}
 	
 	public void play() {
-		Player curPlayer = players.get(pos);
-		while(true) {
-			curPlayer.addTurn();
+		curPlayer = players.get(pos);
+		curPlayer.addTurn();
 			
-			StdOut.println();
-			StdOut.println("Player: " + curPlayer.getName());
-			StdOut.println("Roll?[y/n]");
-			String read = StdIn.readString();
-			
-			while (read.equalsIgnoreCase("y")) {
-				Roll roll = curPlayer.roll();
-				
-				if(checkAndPrintPenalty(roll, curPlayer)) break;
-				
-				StdOut.println("Roll again?[y/n]");
-				read = StdIn.readString();
-			}
-			
-			
-			printTurnScore(curPlayer);
-			printScoreBoard();
-			
-			pos++;
-			if(isLastTurn(curPlayer)) break;
-			curPlayer = players.get((pos >= players.size() ? pos = 0 : pos));
-		}
+//		if(isLastTurn(player))
+//			player = players.get((pos >= players.size() ? pos = 0 : pos));
+//	
 	}
+	
+	public Player getCurPlayer() {
+		return curPlayer;
+	}
+	
+	public boolean roll() {
+		Roll roll = curPlayer.roll();
+		curDice = roll.getDice();
+		return checkAndPrintPenalty(roll, curPlayer);
+	}
+	
+//	public void play() {
+//	Player curPlayer = players.get(pos);
+//	while(true) {
+//		curPlayer.addTurn();
+//		
+//		StdOut.println();
+//		StdOut.println("Player: " + curPlayer.getName());
+//		StdOut.println("Roll?[y/n]");
+//		String read = StdIn.readString();
+//		
+//		while (read.equalsIgnoreCase("y")) {
+//			Roll roll = curPlayer.roll();
+//			
+//			if(checkAndPrintPenalty(roll, curPlayer)) break;
+//			
+//			StdOut.println("Roll again?[y/n]");
+//			read = StdIn.readString();
+//		}
+//		
+//		
+//		printTurnScore(curPlayer);
+//		printScoreBoard();
+//		
+//		pos++;
+//		if(isLastTurn(curPlayer)) break;
+//		curPlayer = players.get((pos >= players.size() ? pos = 0 : pos));
+//	}
+//}
 	
 	private void printTurnScore(Player curPlayer) {
 		StdOut.println("End of turn for " + curPlayer.getName());
@@ -80,25 +102,56 @@ public class Game {
 		StdOut.println("New Game Score: " + curPlayer.getTotalScores());
 	}
 	
+	public String getMsg() {
+		return msg;
+	}
+	
+	public Dice getDice() {
+		return curDice;
+	}
+	
+//	private boolean checkAndPrintPenalty(Roll roll, Player curPlayer) {
+//		if(roll.isSkunk()) {
+//			StdOut.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
+//			curPlayer.removeChip(1);
+//			kitty.add(1);
+//			return true;
+//		}else if(roll.isDoubleSkunk()) {
+//			StdOut.println("Double Skunks! You lose the turn, zeroing out the game score and paying 4 chips to the kitty");
+//			curPlayer.removeChip(4);
+//			kitty.add(4);
+//			curPlayer.zeroGameScores();
+//			return true;
+//		}else if(roll.isDeuce()) {
+//			StdOut.println("Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
+//			curPlayer.removeChip(2);
+//			kitty.add(2);
+//			return true;
+//		}else {
+//			StdOut.println(roll.getDice());
+//			return false;
+//		}
+//	}
+	
 	private boolean checkAndPrintPenalty(Roll roll, Player curPlayer) {
 		if(roll.isSkunk()) {
-			StdOut.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
+			msg = "One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty";
 			curPlayer.removeChip(1);
 			kitty.add(1);
 			return true;
 		}else if(roll.isDoubleSkunk()) {
-			StdOut.println("Double Skunks! You lose the turn, zeroing out the game score and paying 4 chips to the kitty");
+			msg = "Double Skunks! You lose the turn, zeroing out the game score and paying 4 chips to the kitty";
 			curPlayer.removeChip(4);
 			kitty.add(4);
 			curPlayer.zeroGameScores();
 			return true;
 		}else if(roll.isDeuce()) {
-			StdOut.println("Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
+			msg = "Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty";
 			curPlayer.removeChip(2);
 			kitty.add(2);
 			return true;
 		}else {
-			StdOut.println(roll.getDice());
+			msg = "";
 			return false;
 		}
 	}

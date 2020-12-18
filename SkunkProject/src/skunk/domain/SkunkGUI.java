@@ -74,7 +74,7 @@ public class SkunkGUI extends JFrame {
 		JButton btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new GameGUI().setVisible(true);
+				new GameGUI(game).setVisible(true);
 				dispose();
 			}
 		});
