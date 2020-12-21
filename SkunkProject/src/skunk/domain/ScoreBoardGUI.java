@@ -9,6 +9,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 
+// This is the UI for Scoreboard, there are so logical codes
+// which are necessary for dynamic report depending on how many
+// players we have.
 public class ScoreBoardGUI extends JFrame {
 
 	private JPanel contentPane;

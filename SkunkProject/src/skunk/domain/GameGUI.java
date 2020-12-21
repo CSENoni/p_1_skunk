@@ -14,6 +14,13 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JTextPane;
 
+// This will be the main UI throughout the game
+// It is separated from the logic classes as much as
+// possible. However, to make the app works, there are
+// some logical function added here which is not good
+// However, some changes here on UI will not affect much
+// the logic class and vice versa. Changing logical codes
+// may affect the logical class.
 public class GameGUI extends JFrame {
 
 	private JPanel contentPane;

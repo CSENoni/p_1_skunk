@@ -11,6 +11,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.DropMode;
 
+// This is the UI for Guide
 public class GuideGUI extends JFrame {
 
 	private JPanel contentPane;
